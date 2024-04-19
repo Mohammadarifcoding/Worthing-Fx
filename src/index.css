@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.bigScreen-navitem a.active{
+    border-bottom: 2px solid #4A54A4;
+}
+
+.react-tabs__tab--selected{
+    color: white !important;
+    background-color: #1E4A9A !important;
+}
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Apply the animation to the rotating icon */
+  .rotating-icon {
+    animation: rotate 2s linear infinite; /* Adjust duration or animation properties as needed */
+  }
