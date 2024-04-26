@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
 import emailjs from '@emailjs/browser';
-import { v4 as uuidv4 } from 'uuid';
+import { useRef, useState } from 'react';
 import { IoIosCheckbox } from 'react-icons/io';
 import { MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
-import UseAxious from '../../../../Hook/UseAxious';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import UseAxious from '../../../../Hook/UseAxious';
 import generateRandomAlphabet from './../../../ExtraFuntion/GenerateUniqueId';
 
 const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }) => {
@@ -102,7 +101,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
             }
 
             Axious.post('/Order', UserInformation).then((res) => {
-                emailjs.sendForm('service_geyk8rj', 'template_9ag9qg6', tempForm, '-IllRWDI3WXoeT7lj').then((res) => {
+                emailjs.sendForm('service_lpt9pd1', 'template_ydjwope', tempForm, '1JjxeYWCp4LVzupMd').then((res) => {
                     console.log(res);
                 });
                 setlastOrder(UserInformation);

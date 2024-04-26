@@ -1,14 +1,12 @@
-import { Link } from 'react-router-dom';
-import PendingOrder from '../../../../Hook/PendingOrder';
-import UseAxious from '../../../../Hook/UseAxious';
-import { v4 as uuidv4 } from 'uuid';
 import emailjs from '@emailjs/browser';
-import { BsInfoCircleFill } from 'react-icons/bs';
-import Swal from 'sweetalert2';
 import moment from 'moment';
 import { FaInfoCircle } from 'react-icons/fa';
 import { IoMdDoneAll } from 'react-icons/io';
 import { MdDeleteForever } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import PendingOrder from '../../../../Hook/PendingOrder';
+import UseAxious from '../../../../Hook/UseAxious';
 
 const Orders = () => {
     const [pendingOrders, RefetchPendingOrder] = PendingOrder();
@@ -57,7 +55,7 @@ const Orders = () => {
             if (result.isConfirmed) {
                 Axious.get(`/pendingToAceept/${orderId}`).then((res) => {
                     RefetchPendingOrder();
-                    emailjs.sendForm('service_geyk8rj', 'template_gt16753', tempForm, '-IllRWDI3WXoeT7lj').then((res) => {
+                    emailjs.sendForm('service_lpt9pd1', 'template_2p4oryp', tempForm, '1JjxeYWCp4LVzupMd').then((res) => {
                         console.log('email send');
                         Swal.fire({
                             title: 'Accepted!',
@@ -73,7 +71,7 @@ const Orders = () => {
         // Axious.get(`/pendingToAceept/${orderId}`)
         // .then(res => {
         //   RefetchPendingOrder()
-        //   emailjs.sendForm("service_geyk8rj","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
+        //   emailjs.sendForm("service_lpt9pd1","template_gt16753",tempForm,'-IllRWDI3WXoeT7lj')
         //   .then(res=>{
         //     console.log('email send')
         //   })
@@ -169,9 +167,7 @@ const Orders = () => {
                     </div>
                 </div>
             </main>
-            <footer className="bg-[#93C94E] flex justify-center  py-4 text-center">
-                <img className="h-12" src="/public/Images/logo.png" alt="" />
-            </footer>
+
         </div>
     );
 };

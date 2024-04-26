@@ -32,7 +32,7 @@ const Navbar = () => {
                 <div className="flex justify-between py-3 container mx-auto items-center">
                     <Link to={'/'}>
                         <div className="sm:max-w-[300px] max-w-[150px] ">
-                            <img className="w-full h-full" src="/Images/logo.png" alt="" />
+                            <img className="w-full h-full" src="/Images/logo.jpg" alt="" />
                         </div>
                     </Link>
 
