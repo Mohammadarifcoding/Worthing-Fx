@@ -42,7 +42,7 @@ const ContacthtmlForm = () => {
                             </div>
                             <div className="w-full px-6 mt-4">
                              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-small mt-4">Email</h2>
-                                <p className="leading-relaxed md:text-base text-sm">support@worthingFx.co.uk</p>
+                                <p className="leading-relaxed md:text-base text-sm">support@worthingfx.co.uk</p>
                             </div>
                             </div>
 

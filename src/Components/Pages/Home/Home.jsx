@@ -14,16 +14,7 @@ import axios from "axios"
 
 const Home = () => {
     const [currency,refetchCurrency] = UseCurrency()
-    const getData =()=>{
-        axios
-        .get(`https://api.apilayer.com/exchangerates_data/convert?to=EUR&from=GBP&amount=1`, {
-            headers: {
-                apikey: 'axzEXuSlK04KLpdbkJNJlzIuwXJRmopv'
-            }
-        }).then((res) => {
-           console.log(res.data?.info?.rate)
-        })
-    }
+
 
     return (
         <div>
@@ -35,7 +26,7 @@ const Home = () => {
             <CompareCurrencies></CompareCurrencies> 
             <Accordin></Accordin>          
             <Download></Download>
-            <button className='bg-black text-white px-5 py-3 ' onClick={getData}>hello </button>
+           
         </div>
     );
 };

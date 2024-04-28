@@ -28,12 +28,15 @@ const Purchase = () => {
   return (
     <Container>
       <div className="lg:mt-20 mt-10 pb-40">
-        <h2 className="lg:text-3xl text-2xl font-medium md:text-start text-center">
+        <h2 className={`lg:text-3xl text-2xl font-medium md:text-start text-center ${nextFrom == 3 && 'hidden'}`}>
           {
             currentWay == 'Sell' ? <>Sell travel money</>:<>Order travel money</>
           }
           
         </h2>
+        <h2 className={`lg:text-3xl text-2xl font-medium md:text-start text-center ${nextFrom !== 3 && 'hidden'}`}>
+              Order Confirmation
+          </h2>
         {
           nextFrom !== 3 && <Process no={nextFrom}></Process>
         }

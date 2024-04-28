@@ -1,6 +1,7 @@
 import { FaFacebookF, FaInstagram, FaMapLocationDot, FaPhoneVolume, FaXTwitter } from "react-icons/fa6";
 import { IoIosMail } from "react-icons/io";
 import Container from "../Container/Container";
+import { IoMdTime } from "react-icons/io";
 
 const Footer = () => {
     return (
@@ -85,22 +86,27 @@ const Footer = () => {
          </li>
        </ul>
      </div>
-     <div className="w-full md:w-1/2 lg:w-1/4 mb-4 md:mb-0">
+     <div className="w-full md:w-1/2 lg:w-1/4 mb-4 md:mb-0 flex flex-col gap-2">
        <h2 className="text-2xl font-bold mb-3">GET IN TOUCH</h2>
        <p className="flex gap-x-4 items-center"><FaMapLocationDot/> 35 CHAPEL RD WORTHING BN11 1EG </p>
        <p className="flex gap-x-4 items-center" > <FaPhoneVolume />01903 202702</p>
-       <p className="flex gap-x-4 items-center" > <IoIosMail />support@worthingFx.co.uk</p>
+       <p className="flex gap-x-4 items-center" > <IoIosMail />support@worthingfx.co.uk</p>
+       <p className="flex gap-x-4 items-start" > <IoMdTime />Opening hours <br /> Monday to Saturday : 9AM to 5Pm <br />
+       Sunday : 10Am to 2Pm </p>
      </div>
    </div>
  </div >
  {/* copyright Section */}
- <h2 className="text-white text-[15px] mt-16  mb-3 ">WorthingFx IS A TRADING NAME OF WORTHING FX SERVICES LTD,REGISTERED IN ENGLAND AND WALES UNDER NUMBER 10874304,REGISTERED ADDRESS: 35 CHAPEL ROAD , WORTHING, BN11 1EG.</h2>
+ <h2 className="text-white text-[15px] mt-16  mb-3 ">Worthing Fx IS A TRADING NAME OF WORTHING FX SERVICES LTD,REGISTERED IN ENGLAND AND WALES UNDER NUMBER 10874304,REGISTERED ADDRESS: 35 CHAPEL ROAD , WORTHING, BN11 1EG.</h2>
  <div className="border-t-2">
  <div className=" px-20 py-4 flex justify-between ">
    <p>Copyright © 2024 Worthing FX All rights reserved.</p>
    <div>
        <ul className="flex gap-x-4 text-xl items-center">
-           <li><FaFacebookF/></li>
+        <li>
+        <a rel="noreferrer" href="https://www.facebook.com/worthingfx" target='_blank' ><FaFacebookF/></a>
+        </li>
+           
            <li><FaInstagram/></li>
            <li><FaXTwitter/></li>
            

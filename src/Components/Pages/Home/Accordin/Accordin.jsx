@@ -17,7 +17,7 @@ const Accordin = () => {
     { title: 'Can I reserve currency in advance?', description: 'You can conveniently pre-order currency by using our website or by contacting our customer service. We will make sure that the requested amount is available for pick up at their preferred time and location. '},
     { title: 'What identification or documents do I need for currency exchange?', description: 'In order to complete a currency exchange or money transfer, you’ll need a valid government-issued ID (passport, driver’s license, BRP) and, in some cases, additional documentation for larger transactions.  '},
     { title: 'Do you offer international money transfers?', description: 'We offer fast, secure, and efficient international money transfer services via Western Union and WorFX. Transfer funds to family, friends worldwide! '},
-    { title: 'How can I contact customer support if I have questions?', description: 'You can reach our customer support team via phone at 01273 030708, or email us at support@WorthingFx.com, or visit us during business hours. We’re here to assist you with any queries!'}];
+    { title: 'How can I contact customer support if I have questions?', description: 'You can reach our customer support team via phone at 01903202702, or email us at support@worthingfx.co.uk, or visit us during business hours. We’re here to assist you with any queries!'}];
 
   const toggle = (idx) => {
     setIsOpen((prevIdx) => (prevIdx === idx ? null : idx));
