@@ -34,8 +34,10 @@ const Purchase = () => {
           }
           
         </h2>
-      
-        <Process no={nextFrom}></Process>
+        {
+          nextFrom !== 3 && <Process no={nextFrom}></Process>
+        }
+        
          {
           nextFrom == 3 ? '':<OrderSummary allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData}></OrderSummary>
          }
