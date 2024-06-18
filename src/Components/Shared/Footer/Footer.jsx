@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <div>
         {
-<footer className="bg-gray-800 text-white  pt-24 mt-24">
+<footer className="bg-gray-800 text-white  pt-24 mt-24 FutureDelete">
     <Container>
   <div className="container mx-auto ">
    <div className="flex flex-wrap justify-between">
