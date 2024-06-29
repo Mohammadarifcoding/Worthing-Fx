@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { FaRegCheckCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import UseAxious from '../../../../Hook/UseAxious';
+import axios from "axios";
+import { useState } from "react";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import UseAxious from "../../../../Hook/UseAxious";
 
 const AddCurrency = () => {
-    const [currencyName, setCurrencyName] = useState('');
-    const [countryName, setCountryName] = useState('');
+    const [currencyName, setCurrencyName] = useState("");
+    const [countryName, setCountryName] = useState("");
     const [checking, setChecking] = useState(false);
     const [Sell, setSell] = useState(0);
     const [RateData, setRateData] = useState(0);
@@ -32,18 +32,18 @@ const AddCurrency = () => {
         axios
             .get(`https://api.apilayer.com/exchangerates_data/convert?to=${currencyName}&from=GBP&amount=1`, {
                 headers: {
-                    apikey: 'axzEXuSlK04KLpdbkJNJlzIuwXJRmopv'
+                    apikey: "T2xiIiLGT74lpNubi61MkKWOR0qu2s46"
                 }
             })
             .then((res) => {
                 if (res.data?.info?.rate) {
                     setChecking(true);
                     setRateData(res.data?.info?.rate);
-                    console.log(res.data?.info?.rate)
+                    console.log(res.data?.info?.rate);
                 }
             })
             .catch((err) => {
-                toast('Wrong currency tried');
+                toast("Wrong currency tried");
             });
         setCheckingLoading(false);
     };
@@ -51,11 +51,11 @@ const AddCurrency = () => {
     const handleAdd = () => {
         // Logic for adding the currency to the system
         // This function can add the currency and country to your data structure or database
-        Axious.post('/AddCurrency', { label: countryName, value: currencyName, Sell: Sell, Buy: Buy, Rate: RateData })
+        Axious.post("/AddCurrency", { label: countryName, value: currencyName, Sell: Sell, Buy: Buy, Rate: RateData })
             .then((res) => {
                 toast(`Added ${currencyName} currency `);
-                setCountryName('');
-                setCurrencyName('');
+                setCountryName("");
+                setCurrencyName("");
                 setSell(0);
                 setBuy(0);
             })
@@ -82,7 +82,7 @@ const AddCurrency = () => {
                             placeholder="Currency Name"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
-                         <label htmlFor="CountryName" className="text-lg text-gray-200">
+                        <label htmlFor="CountryName" className="text-lg text-gray-200">
                             Country Name
                         </label>
                         <input
@@ -103,7 +103,7 @@ const AddCurrency = () => {
                             placeholder="Sell Rate"
                             className="px-4 py-2 rounded-md focus:outline-none focus:ring text-black focus:border-blue-300"
                         />
-                         <label htmlFor="currencyName" className="text-lg text-gray-200">
+                        <label htmlFor="currencyName" className="text-lg text-gray-200">
                             Buy Rate
                         </label>
                         <input
