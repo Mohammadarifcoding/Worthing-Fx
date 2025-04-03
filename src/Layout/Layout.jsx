@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import Footer from "../Components/Shared/Footer/Footer";
 import Navbar from "../Components/Shared/Navbar/Navbar";
 
-
 const Layout = () => {
     // const { data: curenc, isLoading:NotGettingCurrency } = useQuery({
     //     queryKey: [`currrency${item?.value}`],
@@ -32,10 +31,13 @@ const Layout = () => {
             <Outlet></Outlet>
             <Footer></Footer>
             <Helmet>
-        <meta name="description" content="Zero commission, competitive rates, and the convenience of click
+                <meta
+                    name="description"
+                    content="Zero commission, competitive rates, and the convenience of click
 & collect at Worthing FX. Choose from over 70 currencies for your
-next adventure." />
-      </Helmet>
+next adventure."
+                />
+            </Helmet>
         </div>
     );
 };

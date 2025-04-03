@@ -11,11 +11,16 @@ import { useParams } from "react-router-dom";
 
 const Purchase = () => {
   const [purchaseData, setPurchaseeData] = useState(
-    JSON.parse(localStorage.getItem("purchase"))
+    JSON.parse(localStorage.getItem("purchase"))?.filter(item => {
+      const itemDate = new Date(item.date);
+      const diff = new Date().getTime() - itemDate; // This will be positive only if itemDate is in the past
+      return diff >= 0 && diff <= 30 * 60 * 1000;
+    })
   );
+
   const {currencyParams,currentWay} = useParams()
   
-
+  
   const [currency,refetchCurrency] = UseCurrency()
 
   const [nextFrom,setNextForm] = useState(1)
@@ -50,7 +55,7 @@ const Purchase = () => {
         { nextFrom == 1 ? <>
           <AddProduct currentWay={currentWay} currencyParams={currencyParams} allTheitem={allTheitem} setAllTheItem={setAllTheItem} purchaseData={purchaseData} setPurchaseeData={setPurchaseeData}></AddProduct>
         <ul className="flex flex-col font-medium mt-10 text-lg list-disc ml-6">
-           <li className=" ">Bring you ID for collection</li>
+           <li className=" ">Bring your ID for collection</li>
            <li >Order online, pay in-store</li>
            <li>24-hour rate guarantee upon order arrival in the store</li>
         </ul>

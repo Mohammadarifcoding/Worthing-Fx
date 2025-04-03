@@ -1,4 +1,4 @@
-import emailjs from "@emailjs/browser";
+
 import { useRef, useState } from "react";
 import { IoIosCheckbox } from "react-icons/io";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
@@ -9,10 +9,17 @@ import UseAxious from "../../../../Hook/UseAxious";
 import generateRandomAlphabet from "./../../../ExtraFuntion/GenerateUniqueId";
 import OrderList from "../../../Dashboard/Pages/OrderDetails/OrderList/OrderList";
 
+// import OrderList from "../../../Dashboard/Pages/OrderDetails/OrderList/OrderList";
 const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }) => {
     const AddressForm = useRef();
-    let OrdersData = JSON.parse(localStorage.getItem("purchase"));
+    let OrdersData = JSON.parse(localStorage.getItem("purchase"))?.filter(item => {
+        const itemDate = new Date(item.date);
+        const diff = new Date().getTime() - itemDate; // This will be positive only if itemDate is in the past
+        return diff >= 0 && diff <= 30 * 60 * 1000;
+      });
     const [address, setAddress] = useState("location");
+    const [addressKey, setAddressKey] = useState("");
+    console.log(addressKey)
     const Axious = UseAxious();
     const [Order, setlastOrder] = useState({});
     const [selected, setSelected] = useState(false);
@@ -22,7 +29,11 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
             return toast("Select the checking point");
         }
 
-        const OrderFormLocalStorage = JSON.parse(localStorage.getItem("purchase"));
+        const OrderFormLocalStorage = JSON.parse(localStorage.getItem("purchase"))?.filter(item => {
+            const itemDate = new Date(item.date);
+            const diff = new Date().getTime() - itemDate; // This will be positive only if itemDate is in the past
+            return diff >= 0 && diff <= 30 * 60 * 1000;
+          });
         if (OrderFormLocalStorage?.length < 1) {
             return toast("Please add currency item");
         }
@@ -52,7 +63,11 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 Email: Email,
                 Phone_Number: Phone_Number,
                 Address: address,
-                Orders: JSON.parse(localStorage.getItem("purchase")),
+                Orders: JSON.parse(localStorage.getItem("purchase"))?.filter(item => {
+                    const itemDate = new Date(item.date);
+                    const diff = new Date().getTime() - itemDate; // This will be positive only if itemDate is in the past
+                    return diff >= 0 && diff <= 30 * 60 * 1000;
+                  }),
                 RateFirst: OrdersData[0].Rate,
                 status: "",
                 Status: "Pending",
@@ -64,7 +79,8 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 time: new Date(),
                 CurrencyNameFirst: OrdersData[0].currencyMycurrent === "GBP" ? OrdersData[0].currencyTakecurrent : OrdersData[0].currencyMycurrent,
                 ToFirst: `${OrdersData[0].currencyMy} ${OrdersData[0].currencyMycurrent}`,
-                FromFirst: `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`
+                FromFirst: `${OrdersData[0].currencyTake} ${OrdersData[0].currencyTakecurrent}`,
+                addressKey:addressKey
             };
             if (currentWay == "Order") {
                 UserInformation.title = "Click & Collect";
@@ -108,23 +124,23 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 UserInformation.FourthRowShow = "none";
             }
 
-            console.log(UserInformation.Orders.currencyMycurrent);
-            const tempForm = document.createElement("form");
-            tempForm.style.display = "none";
+            // console.log(UserInformation.Orders.currencyMycurrent);
+            // const tempForm = document.createElement("form");
+            // tempForm.style.display = "none";
 
-            // Loop through the keys of the UserInformation object and create input fields
-            for (const key in UserInformation) {
-                const input = document.createElement("input");
-                input.type = "text";
-                input.name = key;
-                input.value = UserInformation[key];
-                tempForm.appendChild(input);
-            }
+            // // Loop through the keys of the UserInformation object and create input fields
+            // for (const key in UserInformation) {
+            //     const input = document.createElement("input");
+            //     input.type = "text";
+            //     input.name = key;
+            //     input.value = UserInformation[key];
+            //     tempForm.appendChild(input);
+            // }
 
             Axious.post("/Order", UserInformation).then((res) => {
-                emailjs.sendForm("service_lpt9pd1", "template_2p4oryp", tempForm, "1JjxeYWCp4LVzupMd").then((res) => {
-                    console.log(res);
-                });
+                // emailjs.sendForm("service_lpt9pd1", "template_2p4oryp", tempForm, "1JjxeYWCp4LVzupMd").then((res) => {
+                //     console.log(res);
+                // });
                 setlastOrder(UserInformation);
                 localStorage.clear("purchase");
 
@@ -139,6 +155,26 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
         window.print(); // This triggers the browser's print dialog
         return false;
     };
+    const addressData = [
+       {
+            address:"35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702",
+            addressKey:"worthing"
+        }, 
+        {
+            address:"123 QUEENS ROAD BRIGHTON BN1 3WB Tel: 01273030708",
+            addressKey:"brighton"
+        },  
+       
+        {
+            address:'37 East Street CHICHESTER P019 1HS Tel: 01243306565',
+            addressKey:"chichester"
+        },
+        {
+            address:"172 HIGH STREET NORTH, E6 2JA,LONDON Tel: 02085524724",
+            addressKey:"172"
+        },
+
+    ]
     return (
         <>
             {" "}
@@ -146,18 +182,28 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
                 {nextFrom == 1 ? (
                     <>
                         <h2 className="md:text-2xl sm:text-xl text-xl text-[#4A53A4]">Select a Collection Point</h2>
-
                         <select
                             value={address}
                             onChange={(e) => {
-                                setAddress(e.target.value);
+                                const selectedOption = e.target.selectedOptions[0];
+                                const selectedAddress = selectedOption.value;
+                                const key = selectedOption.getAttribute("data-key");
+                                setAddress(selectedAddress);
+                                setAddressKey(key);
                             }}
                             className="w-full px-2 py-2 mt-5 border border-gray-500 rounded-lg outline-gray-500"
                         >
-                            <option value="location">Select locaiton</option>
-
-                            <option value="35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702">35 CHAPEL ROAD WORTHING BN11 1EG Tel: 01903 202702</option>
-                            <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708"> 123 QUEENS ROAD BRIGHTON BN1 3WB Tel:01273 030708</option>
+                            <option value="location">Select location</option>
+                            {addressData.map((item, key) => (
+              <option key={key} value={item.address} data-key={item.addressKey}>
+                {item.address}
+              </option>
+            ))}
+                           
+                            
+                            {/* <option value="123 QUEENS ROAD BRIGHTON BN1 3WB Tel: 01273030708">123 QUEENS ROAD BRIGHTON BN1 3WB Tel: 01273030708</option>
+                            <option value="172 HIGH STREET NORTH, E6 2JA,LONDON Tel: 02085524724">172 HIGH STREET NORTH, E6 2JA,LONDON Tel: 02085524724</option> */}
+                            
                         </select>
 
                         <div className="flex justify-end mt-5 ">
@@ -247,7 +293,7 @@ const CheckingPoint = ({ setAddressSelected, setNextForm, nextFrom, currentWay }
             </div>
             {nextFrom == 3 ? (
                 <>
-                    <div className="px-3 my-10 sm:px-10 print h-[700px]">
+                    <div className="px-3 my-10 sm:px-10 print ">
                         <div className="flex lg:mb-20 mb-7 deleteButton justify-end ">
                             <button onClick={handlePrint} className="px-4 py-2 bg-[#618A2C] rounded-lg text-white">
                                 Print

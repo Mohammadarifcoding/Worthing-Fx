@@ -92,7 +92,7 @@ const Footer = () => {
        <p className="flex gap-x-4 items-center" > <FaPhoneVolume />01903 202702</p>
        <p className="flex gap-x-4 items-center" > <IoIosMail />support@worthingfx.co.uk</p>
        <p className="flex gap-x-4 items-start" > <IoMdTime />Opening hours <br /> Monday to Saturday : 9AM to 5Pm <br />
-       Sunday : 10Am to 2Pm </p>
+       Sunday : 10Am to 3Pm </p>
      </div>
    </div>
  </div >
